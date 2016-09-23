@@ -49,7 +49,6 @@ public class iNesLoader {
 
         // TODO: INST-ROM
         // TODO: PROM
-        int x = 0;
     }
 
     private void readHeader() throws IOException, WrongFormatException {

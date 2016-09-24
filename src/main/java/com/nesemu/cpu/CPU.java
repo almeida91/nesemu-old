@@ -8,9 +8,16 @@ public class CPU {
     private byte X;
     private byte Y;
     private byte SP;
-    private byte P;
 
     private short PC;
+
+    private boolean carryFlag;
+    private boolean zeroFlag;
+    private boolean interruptFlag;
+    private boolean decimalFlag;
+    private boolean breakpointFlag;
+    private boolean overflowFlag;
+    private boolean negativeFlag;
 
     private RAM ram;
 

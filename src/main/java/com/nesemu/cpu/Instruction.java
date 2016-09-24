@@ -11,5 +11,11 @@ public abstract class Instruction {
         this.cpu = cpu;
     }
 
-    public abstract void run(int address);
+    public abstract void run(int opcode, int address);
+
+    public abstract String getMnemonic();
+
+    public int getBaseCycles() {
+        return 2;
+    }
 }

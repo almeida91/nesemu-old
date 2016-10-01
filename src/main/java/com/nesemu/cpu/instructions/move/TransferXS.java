@@ -1,15 +1,16 @@
-package com.nesemu.cpu.instructions;
+package com.nesemu.cpu.instructions.move;
 
 import com.nesemu.cpu.CPU;
 import com.nesemu.cpu.Instruction;
 import com.nesemu.cpu.OpCode;
 
 /**
- * Created by igor on 24/09/16.
+ * Created by igor on 01/10/16.
  */
-@OpCode(code = 0x00)
-public class Break extends Instruction {
-    public Break(CPU cpu) {
+@OpCode(code = 0x9A)
+public class TransferXS extends Instruction {
+
+    public TransferXS(CPU cpu) {
         super(cpu);
     }
 
@@ -20,11 +21,6 @@ public class Break extends Instruction {
 
     @Override
     public String getMnemonic() {
-        return "BRK";
-    }
-
-    @Override
-    public int getBaseCycles() {
-        return 7;
+        return "TXS";
     }
 }

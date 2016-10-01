@@ -5,11 +5,11 @@ import com.nesemu.cpu.Instruction;
 import com.nesemu.cpu.OpCode;
 
 /**
- * Created by igor on 24/09/16.
+ * Created by igor on 01/10/16.
  */
-@OpCode(code = 0x00)
-public class Break extends Instruction {
-    public Break(CPU cpu) {
+@OpCode(code = 0xEA)
+public class NoOperation extends Instruction {
+    public NoOperation(CPU cpu) {
         super(cpu);
     }
 
@@ -20,11 +20,6 @@ public class Break extends Instruction {
 
     @Override
     public String getMnemonic() {
-        return "BRK";
-    }
-
-    @Override
-    public int getBaseCycles() {
-        return 7;
+        return "NOP";
     }
 }

@@ -1,4 +1,4 @@
-package com.nesemu.mapper;
+package com.nesemu.mappers;
 
 /**
  * Created by igor on 19/09/16.

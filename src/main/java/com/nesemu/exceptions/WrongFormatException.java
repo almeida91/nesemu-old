@@ -1,4 +1,4 @@
-package com.nesemu.exception;
+package com.nesemu.exceptions;
 
 /**
  * Created by igor on 16/09/16.

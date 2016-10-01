@@ -2,10 +2,9 @@
 
 package com.nesemu;
 
-import com.nesemu.exception.WrongFormatException;
-import com.nesemu.loader.iNesLoader;
+import com.nesemu.exceptions.WrongFormatException;
+import com.nesemu.loaders.iNesLoader;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**

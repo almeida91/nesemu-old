@@ -14,5 +14,6 @@ public enum AddressingMode {
     INDIRECT,
     INDIRECT_X,
     INDIRECT_Y,
-    RELATIVE
+    RELATIVE,
+    IMPLIED
 }

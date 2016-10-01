@@ -5,7 +5,6 @@ package com.nesemu.cpu;
  */
 public abstract class Instruction {
     private CPU cpu;
-    private RAM ram;
 
     public Instruction(CPU cpu) {
         this.cpu = cpu;
@@ -17,5 +16,9 @@ public abstract class Instruction {
 
     public int getBaseCycles() {
         return 2;
+    }
+
+    public CPU getCpu() {
+        return cpu;
     }
 }

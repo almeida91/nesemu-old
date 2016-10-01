@@ -11,5 +11,5 @@ import java.lang.annotation.*;
 public @interface OpCode {
     int code();
 
-    AddressingMode mode() default AddressingMode.RELATIVE;
+    AddressingMode mode() default AddressingMode.IMPLIED;
 }

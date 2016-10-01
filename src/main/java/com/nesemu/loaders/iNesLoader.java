@@ -1,7 +1,7 @@
-package com.nesemu.loader;
+package com.nesemu.loaders;
 
-import com.nesemu.exception.WrongFormatException;
-import com.nesemu.mapper.MirrorType;
+import com.nesemu.exceptions.WrongFormatException;
+import com.nesemu.mappers.MirrorType;
 import com.nesemu.ppu.TvSystem;
 
 import java.io.BufferedInputStream;

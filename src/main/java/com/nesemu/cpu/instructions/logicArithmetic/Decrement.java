@@ -26,4 +26,9 @@ public class Decrement extends Instruction {
     public String getMnemonic() {
         return "DEC";
     }
+
+    @Override
+    public int getBaseCycles() {
+        return 4;
+    }
 }

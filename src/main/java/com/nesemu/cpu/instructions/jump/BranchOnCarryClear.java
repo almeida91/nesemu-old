@@ -16,7 +16,9 @@ public class BranchOnCarryClear extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        if (!getCpu().isCarryFlag()) {
+            getCpu().setPC(address);
+        }
     }
 
     @Override

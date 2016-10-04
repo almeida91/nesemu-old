@@ -21,16 +21,19 @@ public class AtihmeticShiftLeft extends Instruction {
     @Override
     public void run(int opcode, int address) {
         int value;
+
         if (opcode == 0x0A) {
+            getCpu().setCarryFlag(getCpu().getA() >> 7 == 1);
             value = getCpu().getA() << 1;
-            getCpu().setA(value & 0xFF);
-        }
-        else {
-            value = getCpu().readMemory(address) << 1;
+            getCpu().setA(value);
+        } else {
+            value = getCpu().readMemory(address);
+            getCpu().setCarryFlag(value >> 7 == 1);
+            value <<= 1;
             getCpu().writeMemory(address, value);
         }
 
-        getCpu().setCarryFlag((value & 0x100) != 0);
+        setFlags(value, true, true, true, false);
     }
 
     @Override

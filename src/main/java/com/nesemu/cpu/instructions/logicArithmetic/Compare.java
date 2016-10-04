@@ -16,14 +16,14 @@ import com.nesemu.cpu.OpCode;
 @OpCode(code = 0xCD, mode = AddressingMode.ABSOLUTE)
 @OpCode(code = 0xDD, mode = AddressingMode.ABSOLUTE_X)
 @OpCode(code = 0xD9, mode = AddressingMode.ABSOLUTE_Y)
-public class Compare extends Instruction {
+public class Compare extends Instruction implements CompareMixin {
     public Compare(CPU cpu) {
         super(cpu);
     }
 
     @Override
     public void run(int opcode, int address) {
-
+        compare(getCpu().getA(), getCpu().readMemory(address));
     }
 
     @Override

@@ -23,7 +23,9 @@ public class And extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        int value = getCpu().getA() & getCpu().readMemory(address);
+        getCpu().setA(value);
+        setFlags(value, true, true, false, false);
     }
 
     @Override

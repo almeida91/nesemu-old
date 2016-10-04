@@ -21,4 +21,26 @@ public abstract class Instruction {
     public CPU getCpu() {
         return cpu;
     }
+
+    protected void setFlags(int value, boolean negative, boolean zero, boolean carry, boolean overflow) {
+        if (carry) {
+            getCpu().setCarryFlag((value & 0x100) != 0);
+        }
+
+        if (negative) {
+            getCpu().setNegativeFlag((value & 0x80) != 0);
+        }
+
+        if (zero) {
+            getCpu().setZeroFlag(value == 0);
+        }
+
+        if (overflow) {
+            getCpu().setOverflowFlag((((getCpu().getA() ^ value) & 0x80) == 0) && (((getCpu().getA() ^ value) & 0x80) != 0));
+        }
+    }
+
+    protected void setFlags(int value) {
+        setFlags(value, true, true, true, true);
+    }
 }

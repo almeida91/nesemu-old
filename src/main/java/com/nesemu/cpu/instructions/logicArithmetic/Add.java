@@ -23,9 +23,12 @@ public class Add extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-        getCpu().setA(getCpu().getA() + getCpu().readMemory(address));
+        int value = getCpu().getA() + getCpu().readMemory(address);
+        value += getCpu().isCarryFlag() ? 1 : 0;
 
-        // TODO: adc bit flags
+        getCpu().setA(value);
+
+        setFlags(value);
     }
 
     @Override

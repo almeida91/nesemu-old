@@ -15,11 +15,12 @@ public class DecrementY extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setY(getCpu().getY() - 1);
+        setFlags(getCpu().getY(), true, true, false, false);
     }
 
     @Override
     public String getMnemonic() {
-        return null;
+        return "DEY";
     }
 }

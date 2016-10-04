@@ -15,7 +15,8 @@ public class IncrementY extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setY(getCpu().getY() + 1);
+        setFlags(getCpu().getY(), true, true, false, false);
     }
 
     @Override

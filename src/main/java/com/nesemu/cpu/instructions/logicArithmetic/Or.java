@@ -24,8 +24,7 @@ public class Or extends Instruction {
     @Override
     public void run(int opcode, int address) {
         getCpu().setA(getCpu().getA() | getCpu().readMemory(address));
-
-        // TODO: ora bit flags
+        setFlags(getCpu().getA(), true, true, false, false);
     }
 
     @Override

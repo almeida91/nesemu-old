@@ -19,7 +19,9 @@ public class Decrement extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        int value = getCpu().readMemory(address) - 1;
+        getCpu().writeMemory(address, value);
+        setFlags(value, true, true, false, false);
     }
 
     @Override

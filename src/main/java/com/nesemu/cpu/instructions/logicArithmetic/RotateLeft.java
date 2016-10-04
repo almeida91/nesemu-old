@@ -31,7 +31,7 @@ public class RotateLeft extends Instruction {
             getCpu().writeMemory(address, value);
         }
 
-        getCpu().setCarryFlag((value & 0x100) != 0);
+        setFlags(value, true, true, true, false);
     }
 
     @Override

@@ -15,7 +15,8 @@ public class IncrementX extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setX(getCpu().getX() + 1);
+        setFlags(getCpu().getX(), true, true, false, false);
     }
 
     @Override

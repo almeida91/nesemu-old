@@ -20,7 +20,18 @@ public class LogicalShiftRight extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        if (opcode == 0x4A) {
+            getCpu().setCarryFlag((getCpu().getA() & 1) == 1);
+            getCpu().setA(getCpu().getA() >> 1);
+            setFlags(getCpu().getA(), true, true, false, false);
+        }
+        else {
+            int value = getCpu().readMemory(address);
+            getCpu().setCarryFlag((value & 1) == 1);
+            value >>= 1;
+            getCpu().writeMemory(address, value);
+            setFlags(value, true, true, false, false);
+        }
     }
 
     @Override

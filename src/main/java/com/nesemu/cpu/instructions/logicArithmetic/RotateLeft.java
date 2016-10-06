@@ -21,17 +21,24 @@ public class RotateLeft extends Instruction {
     @Override
     public void run(int opcode, int address) {
         int value;
+
         if (opcode == 0x0A) {
-            value = getCpu().getA() << 1;
-            value &= getCpu().isCarryFlag() ? 1 : 0;
+            int c = getCpu().isCarryFlag() ? 1 : 0;
+            value = getCpu().getA();
+            setFlags(value, false, false, true, false);
+            value <<= 1;
+            value &= c;
             getCpu().setA(value & 0xFF);
         } else {
-            value = getCpu().readMemory(address) << 1;
-            value &= getCpu().isCarryFlag() ? 1 : 0;
+            int c = getCpu().isCarryFlag() ? 1 : 0;
+            value = getCpu().readMemory(address);
+            setFlags(value, false, false, true, false);
+            value <<= 1;
+            value &= c;
             getCpu().writeMemory(address, value);
         }
 
-        setFlags(value, true, true, true, false);
+        setFlags(value, true, true, false, false);
     }
 
     @Override

@@ -20,7 +20,28 @@ public class RotateRight extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
+        int value;
 
+        if (opcode == 0x6A) {
+            value = getCpu().getA();
+            int c = getCpu().isCarryFlag() ? 0x80 : 0;
+            getCpu().setCarryFlag((value & 1) == 1);
+            value >>= 1;
+            value |= c;
+            getCpu().setA(value);
+            setFlags(value, true, true, false, false);
+        }
+        else {
+            value = getCpu().readMemory(address);
+            int c = getCpu().isCarryFlag() ? 0x80 : 0;
+            getCpu().setCarryFlag((value & 1) == 1);
+            value >>= 1;
+            value |= c;
+            getCpu().writeMemory(address, value);
+            setFlags(value, true, true, false, false);
+        }
+
+        setFlags(value, true, true, false, false);
     }
 
     @Override

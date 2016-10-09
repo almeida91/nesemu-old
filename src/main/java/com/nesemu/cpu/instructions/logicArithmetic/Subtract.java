@@ -23,7 +23,12 @@ public class Subtract extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
+        int value = getCpu().getA() - getCpu().readMemory(address);
+        value -= getCpu().isCarryFlag() ? 1 : 0;
 
+        getCpu().setA(value);
+
+        setFlags(value);
     }
 
     @Override

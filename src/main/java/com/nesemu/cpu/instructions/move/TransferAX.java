@@ -15,7 +15,8 @@ public class TransferAX extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setX(getCpu().getA());
+        setFlags(getCpu().getX(), true, true, false, false);
     }
 
     @Override

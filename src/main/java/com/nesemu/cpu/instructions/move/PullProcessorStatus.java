@@ -15,11 +15,16 @@ public class PullProcessorStatus extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setP(getCpu().pull());
     }
 
     @Override
     public String getMnemonic() {
         return "PLP";
+    }
+
+    @Override
+    public int getBaseCycles() {
+        return 4;
     }
 }

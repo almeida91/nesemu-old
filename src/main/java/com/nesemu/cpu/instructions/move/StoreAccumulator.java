@@ -22,11 +22,16 @@ public class StoreAccumulator extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().writeMemory(address, getCpu().getA());
     }
 
     @Override
     public String getMnemonic() {
         return "STA";
+    }
+
+    @Override
+    public int getBaseCycles() {
+        return 3;
     }
 }

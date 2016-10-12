@@ -20,7 +20,8 @@ public class LoadX extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setX(getCpu().readMemory(address));
+        setFlags(getCpu().getX());
     }
 
     @Override

@@ -23,7 +23,8 @@ public class LoadAccumulator extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setA(getCpu().readMemory(address));
+        setFlags(getCpu().getA(), true, true, false, false);
     }
 
     @Override

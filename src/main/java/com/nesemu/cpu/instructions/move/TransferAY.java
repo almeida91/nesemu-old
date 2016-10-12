@@ -15,7 +15,8 @@ public class TransferAY extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setY(getCpu().getA());
+        setFlags(getCpu().getY(), true, true, false, false);
     }
 
     @Override

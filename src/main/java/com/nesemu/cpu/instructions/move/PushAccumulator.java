@@ -15,11 +15,16 @@ public class PushAccumulator extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().push(getCpu().getA());
     }
 
     @Override
     public String getMnemonic() {
         return "PHA";
+    }
+
+    @Override
+    public int getBaseCycles() {
+        return 3;
     }
 }

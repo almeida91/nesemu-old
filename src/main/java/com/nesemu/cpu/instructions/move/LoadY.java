@@ -20,7 +20,8 @@ public class LoadY extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setY(getCpu().readMemory(address));
+        setFlags(getCpu().getY(), true, true, false, false);
     }
 
     @Override

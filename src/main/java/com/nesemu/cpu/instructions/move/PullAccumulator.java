@@ -15,11 +15,17 @@ public class PullAccumulator extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setA(getCpu().pull());
+        setFlags(getCpu().getA(), true, true, false, false);
     }
 
     @Override
     public String getMnemonic() {
         return "PLA";
+    }
+
+    @Override
+    public int getBaseCycles() {
+        return 4;
     }
 }

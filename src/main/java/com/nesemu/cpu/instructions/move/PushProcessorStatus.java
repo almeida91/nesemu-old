@@ -15,11 +15,16 @@ public class PushProcessorStatus extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().push(getCpu().getP());
     }
 
     @Override
     public String getMnemonic() {
         return "PHP";
+    }
+
+    @Override
+    public int getBaseCycles() {
+        return 3;
     }
 }

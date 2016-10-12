@@ -18,11 +18,16 @@ public class StoreY extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().writeMemory(address, getCpu().getY());
     }
 
     @Override
     public String getMnemonic() {
         return "STY";
+    }
+
+    @Override
+    public int getBaseCycles() {
+        return 3;
     }
 }

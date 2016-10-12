@@ -29,8 +29,4 @@ public class Decrement extends Instruction {
         return "DEC";
     }
 
-    @Override
-    public int getBaseCycles() {
-        return 4;
-    }
 }

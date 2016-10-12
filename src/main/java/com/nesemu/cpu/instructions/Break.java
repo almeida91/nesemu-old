@@ -23,8 +23,4 @@ public class Break extends Instruction {
         return "BRK";
     }
 
-    @Override
-    public int getBaseCycles() {
-        return 7;
-    }
 }

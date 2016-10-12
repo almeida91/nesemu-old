@@ -9,16 +9,19 @@ public class InstructionCall {
     private AddressingMode mode;
     private CPU cpu;
     private int opcode;
+    private int cycles;
 
-    public InstructionCall(Instruction instruction, AddressingMode mode, CPU cpu, int opcode) {
+    public InstructionCall(Instruction instruction, AddressingMode mode, CPU cpu, int opcode, int cycles) {
         this.instruction = instruction;
         this.mode = mode;
         this.cpu = cpu;
         this.opcode = opcode;
+        this.cycles = cycles;
     }
 
-    public void run() {
+    public int run() {
         int addr;
+
 
         switch (mode) {
             case ABSOLUTE:
@@ -59,38 +62,41 @@ public class InstructionCall {
         }
 
         instruction.run(opcode, addr);
+
+        return cycles;
     }
 
     private int immediate() {
-        return 0;
+        return cpu.getNextPc();
     }
 
     private int zeroPage() {
-        return 0;
+        return cpu.readMemory();
     }
 
     private int zeroPageX() {
-        return 0;
+        return zeroPage() + cpu.getX();
     }
 
     private int zeroPageY() {
-        return 0;
+        return zeroPage() + cpu.getY();
     }
 
     private int absolute() {
-        return 0;
+        return cpu.readMemory16bit();
     }
 
     private int absoluteX() {
-        return 0;
+        return absolute() + cpu.getX();
     }
 
     private int absoluteY() {
-        return 0;
+        return absolute() + cpu.getY();
     }
 
     private int indirect() {
-        return 0;
+        int addr = cpu.readMemory16bit();
+        return cpu.readMemory16bit(addr);
     }
 
     private int indirectX() {
@@ -102,6 +108,8 @@ public class InstructionCall {
     }
 
     private int relative() {
-        return 0;
+        int addr = cpu.getPC();
+        addr += cpu.readMemory();
+        return addr;
     }
 }

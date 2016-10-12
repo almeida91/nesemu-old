@@ -23,6 +23,10 @@ public class CPU {
 
     private int cycles;
 
+    public void initialize() {
+
+    }
+
     public void cycle() {
 
     }
@@ -37,8 +41,59 @@ public class CPU {
         }
     }
 
+    public int readMemory() {
+        return readMemory(PC++);
+    }
+
+    public int readMemory16bit() {
+        int value = readMemory();
+        value |= readMemory() << 8;
+        return value;
+    }
+
+    public int readMemory16bit(int address) {
+        int value = readMemory(address);
+        value |= readMemory(address + 1) << 8;
+        return value;
+    }
+
     public void writeMemory(int address, int value) {
 
+    }
+
+    public int getNextPc() {
+        return PC++;
+    }
+
+    public void push(int value) {
+        writeMemory(SP, value);
+        SP--;
+    }
+
+    public int pull() {
+        SP++;
+        return readMemory(SP);
+    }
+
+    public int getP() {
+        int p = carryFlag ? 1 : 0;
+
+        p |= zeroFlag ? 0b10 : 0;
+        p |= interruptFlag ? 0b100 : 0;
+        p |= breakpointFlag ? 0b10000 : 0;
+        p |= overflowFlag ? 0b1000000 : 0;
+        p |= negativeFlag ? 0b10000000 : 0;
+
+        return p;
+    }
+
+    public void setP(int p) {
+        carryFlag = (p & 1) != 0;
+        zeroFlag = (p & 0b10) != 0;
+        interruptFlag = (p & 0b100) != 0;
+        breakpointFlag = (p & 0b10000) != 0;
+        overflowFlag = (p & 0b1000000) != 0;
+        negativeFlag = (p & 0b10000000) != 0;
     }
 
     public int getA() {
@@ -69,16 +124,16 @@ public class CPU {
         return SP;
     }
 
+    public void setSP(int SP) {
+        this.SP = SP;
+    }
+
     public int getPC() {
         return PC;
     }
 
     public void setPC(int PC) {
         this.PC = PC;
-    }
-
-    public int getP() {
-        return 0;
     }
 
     public boolean isCarryFlag() {

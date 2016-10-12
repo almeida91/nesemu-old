@@ -23,8 +23,4 @@ public class PushProcessorStatus extends Instruction {
         return "PHP";
     }
 
-    @Override
-    public int getBaseCycles() {
-        return 3;
-    }
 }

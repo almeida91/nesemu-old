@@ -23,8 +23,4 @@ public class ReturnFromSubroutine extends Instruction {
         return "RTS";
     }
 
-    @Override
-    public int getBaseCycles() {
-        return 6;
-    }
 }

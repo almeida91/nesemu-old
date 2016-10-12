@@ -30,8 +30,4 @@ public class StoreAccumulator extends Instruction {
         return "STA";
     }
 
-    @Override
-    public int getBaseCycles() {
-        return 3;
-    }
 }

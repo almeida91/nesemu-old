@@ -23,8 +23,4 @@ public class PullProcessorStatus extends Instruction {
         return "PLP";
     }
 
-    @Override
-    public int getBaseCycles() {
-        return 4;
-    }
 }

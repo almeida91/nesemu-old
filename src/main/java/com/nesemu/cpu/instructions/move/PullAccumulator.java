@@ -24,8 +24,4 @@ public class PullAccumulator extends Instruction {
         return "PLA";
     }
 
-    @Override
-    public int getBaseCycles() {
-        return 4;
-    }
 }

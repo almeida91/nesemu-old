@@ -14,10 +14,6 @@ public abstract class Instruction {
 
     public abstract String getMnemonic();
 
-    public int getBaseCycles() {
-        return 2;
-    }
-
     public CPU getCpu() {
         return cpu;
     }
@@ -27,6 +23,7 @@ public abstract class Instruction {
             getCpu().setCarryFlag((value & 0x100) != 0);
         }
 
+        // TODO: considerar
         if (negative) {
             getCpu().setNegativeFlag((value & 0x80) != 0);
         }

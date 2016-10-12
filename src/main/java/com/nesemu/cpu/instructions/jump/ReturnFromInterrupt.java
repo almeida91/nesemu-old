@@ -23,8 +23,4 @@ public class ReturnFromInterrupt extends Instruction {
         return "RTI";
     }
 
-    @Override
-    public int getBaseCycles() {
-        return 6;
-    }
 }

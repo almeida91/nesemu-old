@@ -23,8 +23,4 @@ public class PushAccumulator extends Instruction {
         return "PHA";
     }
 
-    @Override
-    public int getBaseCycles() {
-        return 3;
-    }
 }

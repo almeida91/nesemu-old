@@ -26,8 +26,4 @@ public class StoreX extends Instruction {
         return "STX";
     }
 
-    @Override
-    public int getBaseCycles() {
-        return 3;
-    }
 }

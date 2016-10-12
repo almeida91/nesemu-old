@@ -23,7 +23,7 @@ public abstract class Instruction {
             getCpu().setCarryFlag((value & 0x100) != 0);
         }
 
-        // TODO: considerar
+        // TODO: considerar se o valor vai vir com um uint ou um byte
         if (negative) {
             getCpu().setNegativeFlag((value & 0x80) != 0);
         }

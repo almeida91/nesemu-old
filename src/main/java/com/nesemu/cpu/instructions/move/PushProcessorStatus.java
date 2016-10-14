@@ -7,7 +7,7 @@ import com.nesemu.cpu.OpCode;
 /**
  * Created by igor on 01/10/16.
  */
-@OpCode(code = 0x08)
+@OpCode(code = 0x08, cycles = 3)
 public class PushProcessorStatus extends Instruction {
     public PushProcessorStatus(CPU cpu) {
         super(cpu);

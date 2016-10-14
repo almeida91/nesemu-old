@@ -9,8 +9,8 @@ import com.nesemu.cpu.OpCode;
  * Created by igor on 01/10/16.
  */
 @OpCode(code = 0xC0, mode = AddressingMode.IMMEDIATE)
-@OpCode(code = 0xC4, mode = AddressingMode.ZERO_PAGE)
-@OpCode(code = 0xCC, mode = AddressingMode.ABSOLUTE)
+@OpCode(code = 0xC4, mode = AddressingMode.ZERO_PAGE, cycles = 3)
+@OpCode(code = 0xCC, mode = AddressingMode.ABSOLUTE, cycles = 4)
 public class CompareY extends Instruction implements CompareMixin {
     public CompareY(CPU cpu) {
         super(cpu);

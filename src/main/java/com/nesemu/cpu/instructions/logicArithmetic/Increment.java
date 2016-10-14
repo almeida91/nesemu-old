@@ -8,10 +8,10 @@ import com.nesemu.cpu.OpCode;
 /**
  * Created by igor on 01/10/16.
  */
-@OpCode(code = 0xE6, mode = AddressingMode.ZERO_PAGE)
-@OpCode(code = 0xF6, mode = AddressingMode.ZERO_PAGE_X)
-@OpCode(code = 0xEE, mode = AddressingMode.ABSOLUTE)
-@OpCode(code = 0xFE, mode = AddressingMode.ABSOLUTE_X)
+@OpCode(code = 0xE6, mode = AddressingMode.ZERO_PAGE, cycles = 5)
+@OpCode(code = 0xF6, mode = AddressingMode.ZERO_PAGE_X, cycles = 6)
+@OpCode(code = 0xEE, mode = AddressingMode.ABSOLUTE, cycles = 6)
+@OpCode(code = 0xFE, mode = AddressingMode.ABSOLUTE_X, cycles = 7)
 public class Increment extends Instruction {
     public Increment(CPU cpu) {
         super(cpu);

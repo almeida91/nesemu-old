@@ -7,7 +7,7 @@ import com.nesemu.cpu.OpCode;
 /**
  * Created by igor on 01/10/16.
  */
-@OpCode(code = 0x48)
+@OpCode(code = 0x48, cycles = 3)
 public class PushAccumulator extends Instruction {
     public PushAccumulator(CPU cpu) {
         super(cpu);

@@ -7,7 +7,7 @@ import com.nesemu.cpu.OpCode;
 /**
  * Created by igor on 24/09/16.
  */
-@OpCode(code = 0x00)
+@OpCode(code = 0x00, cycles = 7)
 public class Break extends Instruction {
     public Break(CPU cpu) {
         super(cpu);

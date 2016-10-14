@@ -9,10 +9,10 @@ import com.nesemu.cpu.OpCode;
  * Created by igor on 01/10/16.
  */
 @OpCode(code = 0x0A)
-@OpCode(code = 0x06, mode = AddressingMode.ZERO_PAGE)
-@OpCode(code = 0x16, mode = AddressingMode.ZERO_PAGE_X)
-@OpCode(code = 0x0E, mode = AddressingMode.ABSOLUTE)
-@OpCode(code = 0x1E, mode = AddressingMode.ABSOLUTE_X)
+@OpCode(code = 0x06, mode = AddressingMode.ZERO_PAGE, cycles = 5)
+@OpCode(code = 0x16, mode = AddressingMode.ZERO_PAGE_X, cycles = 6)
+@OpCode(code = 0x0E, mode = AddressingMode.ABSOLUTE, cycles = 6)
+@OpCode(code = 0x1E, mode = AddressingMode.ABSOLUTE_X, cycles = 7)
 public class AtihmeticShiftLeft extends Instruction {
     public AtihmeticShiftLeft(CPU cpu) {
         super(cpu);

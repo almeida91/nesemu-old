@@ -8,7 +8,7 @@ import com.nesemu.cpu.OpCode;
 /**
  * Created by igor on 01/10/16.
  */
-@OpCode(code = 0x50, mode = AddressingMode.RELATIVE)
+@OpCode(code = 0x50, mode = AddressingMode.RELATIVE, cycles = 3)
 public class BranchOnOverflowClear extends Instruction {
     public BranchOnOverflowClear(CPU cpu) {
         super(cpu);

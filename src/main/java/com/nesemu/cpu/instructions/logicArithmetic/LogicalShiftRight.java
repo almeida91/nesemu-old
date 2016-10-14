@@ -9,10 +9,10 @@ import com.nesemu.cpu.OpCode;
  * Created by igor on 01/10/16.
  */
 @OpCode(code = 0x4A)
-@OpCode(code = 0x46, mode = AddressingMode.ZERO_PAGE)
-@OpCode(code = 0x56, mode = AddressingMode.ZERO_PAGE_X)
-@OpCode(code = 0x4E, mode = AddressingMode.ABSOLUTE)
-@OpCode(code = 0x5E, mode = AddressingMode.ABSOLUTE_X)
+@OpCode(code = 0x46, mode = AddressingMode.ZERO_PAGE, cycles = 5)
+@OpCode(code = 0x56, mode = AddressingMode.ZERO_PAGE_X, cycles = 6)
+@OpCode(code = 0x4E, mode = AddressingMode.ABSOLUTE, cycles = 6)
+@OpCode(code = 0x5E, mode = AddressingMode.ABSOLUTE_X, cycles = 7)
 public class LogicalShiftRight extends Instruction {
     public LogicalShiftRight(CPU cpu) {
         super(cpu);

@@ -9,10 +9,10 @@ import com.nesemu.cpu.OpCode;
  * Created by igor on 01/10/16.
  */
 @OpCode(code = 0x6A)
-@OpCode(code = 0x66, mode = AddressingMode.ZERO_PAGE)
-@OpCode(code = 0x76, mode = AddressingMode.ZERO_PAGE_X)
-@OpCode(code = 0x6E, mode = AddressingMode.ABSOLUTE)
-@OpCode(code = 0x7E, mode = AddressingMode.ABSOLUTE_X)
+@OpCode(code = 0x66, mode = AddressingMode.ZERO_PAGE, cycles = 5)
+@OpCode(code = 0x76, mode = AddressingMode.ZERO_PAGE_X, cycles = 6)
+@OpCode(code = 0x6E, mode = AddressingMode.ABSOLUTE, cycles = 6)
+@OpCode(code = 0x7E, mode = AddressingMode.ABSOLUTE_X, cycles = 7)
 public class RotateRight extends Instruction {
     public RotateRight(CPU cpu) {
         super(cpu);

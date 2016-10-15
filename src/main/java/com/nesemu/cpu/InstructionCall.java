@@ -105,8 +105,8 @@ public class InstructionCall {
     }
 
     private int indirectY() {
-        int addr = cpu.readMemory() + cpu.getY();
-        addr = cpu.readMemory16bit(addr);
+        int addr = cpu.readMemory();
+        addr = cpu.readMemory16bit(addr) + cpu.getY();
         return addr;
     }
 

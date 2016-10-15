@@ -1,5 +1,7 @@
 package com.nesemu.cpu;
 
+import com.nesemu.Util;
+
 /**
  * Created by igor on 15/09/16.
  */

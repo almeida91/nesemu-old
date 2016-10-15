@@ -22,7 +22,6 @@ public class InstructionCall {
     public int run() {
         int addr;
 
-
         switch (mode) {
             case ABSOLUTE:
                 addr = absolute();
@@ -100,11 +99,15 @@ public class InstructionCall {
     }
 
     private int indirectX() {
-        return 0;
+        int addr = cpu.readMemory() + cpu.getX();
+        addr = cpu.readMemory16bit(addr);
+        return addr;
     }
 
     private int indirectY() {
-        return 0;
+        int addr = cpu.readMemory() + cpu.getY();
+        addr = cpu.readMemory16bit(addr);
+        return addr;
     }
 
     private int relative() {

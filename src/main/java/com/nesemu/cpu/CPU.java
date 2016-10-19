@@ -1,6 +1,9 @@
 package com.nesemu.cpu;
 
+import com.nesemu.Mapper;
 import com.nesemu.Util;
+
+import java.util.Map;
 
 /**
  * Created by igor on 15/09/16.
@@ -25,12 +28,26 @@ public class CPU {
 
     private int cycles;
 
+    private Mapper mapper;
+
+    private Map<Integer, InstructionCall> instructions;
+
     public void initialize() {
 
     }
 
     public void cycle() {
+        if (cycles == 0) {
+            int opcode = readMemory();
 
+            InstructionCall call = instructions.get(opcode);
+            cycles = call.run();
+
+            PC++;
+        }
+        else {
+            cycles--;
+        }
     }
 
     public int readMemory(int address) {
@@ -38,7 +55,10 @@ public class CPU {
             return ram[address];
         } else if (address < 0x1FFF) {
             return ram[address & 0x7FFF];
-        } else {
+        } else if (address > 0x4018) {
+            return readMemory(address);
+        }
+        else {
             return 0;
         }
     }
@@ -60,9 +80,13 @@ public class CPU {
     }
 
     public void writeMemory(int address, int value) {
-
+        value &= 0xFF;
     }
 
+    /**
+     * Increases and return the value of the program counter
+     * @return the new value to the PC register
+     */
     public int getNextPc() {
         return PC++;
     }

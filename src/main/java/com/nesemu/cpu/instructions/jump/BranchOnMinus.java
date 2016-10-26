@@ -8,7 +8,7 @@ import com.nesemu.cpu.OpCode;
 /**
  * Created by igor on 01/10/16.
  */
-@OpCode(code = 0x30, mode = AddressingMode.RELATIVE)
+@OpCode(code = 0x30, mode = AddressingMode.RELATIVE, crossBoundaryPenalty = true)
 public class BranchOnMinus extends Instruction {
     public BranchOnMinus(CPU cpu) {
         super(cpu);
@@ -16,7 +16,9 @@ public class BranchOnMinus extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        if (getCpu().isNegativeFlag()) {
+            getCpu().setPC(address);
+        }
     }
 
     @Override

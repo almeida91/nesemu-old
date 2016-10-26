@@ -17,7 +17,7 @@ public class Jump extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setPC(address);
     }
 
     @Override

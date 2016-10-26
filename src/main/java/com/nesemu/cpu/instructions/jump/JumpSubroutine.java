@@ -16,7 +16,8 @@ public class JumpSubroutine extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().push16bits(getCpu().getPC() + 2);
+        getCpu().setPC(address);
     }
 
     @Override

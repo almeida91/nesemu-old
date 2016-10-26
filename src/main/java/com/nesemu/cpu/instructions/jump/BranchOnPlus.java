@@ -16,7 +16,9 @@ public class BranchOnPlus extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        if (!getCpu().isNegativeFlag()) {
+            getCpu().setPC(address);
+        }
     }
 
     @Override

@@ -8,7 +8,7 @@ import com.nesemu.cpu.OpCode;
 /**
  * Created by igor on 01/10/16.
  */
-@OpCode(code = 0x70, mode = AddressingMode.RELATIVE)
+@OpCode(code = 0x70, mode = AddressingMode.RELATIVE, crossBoundaryPenalty = true)
 public class BranchOnOverflowSet extends Instruction {
     public BranchOnOverflowSet(CPU cpu) {
         super(cpu);
@@ -16,7 +16,9 @@ public class BranchOnOverflowSet extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        if (getCpu().isOverflowFlag()) {
+            getCpu().setPC(address);
+        }
     }
 
     @Override

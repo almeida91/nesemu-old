@@ -101,6 +101,16 @@ public class CPU {
         return readMemory(SP);
     }
 
+    public void push16bits(int value) {
+        push(value >> 8);
+        push(value & 0xFF);
+    }
+
+    public int pull16bits() {
+        int value = pull();
+        return (pull() << 8) | value;
+    }
+
     public int getP() {
         int p = carryFlag ? 1 : 0;
 

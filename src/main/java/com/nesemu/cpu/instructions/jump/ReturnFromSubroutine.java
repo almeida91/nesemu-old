@@ -7,7 +7,7 @@ import com.nesemu.cpu.OpCode;
 /**
  * Created by igor on 01/10/16.
  */
-@OpCode(code = 0x60)
+@OpCode(code = 0x60, cycles = 6)
 public class ReturnFromSubroutine extends Instruction {
     public ReturnFromSubroutine(CPU cpu) {
         super(cpu);
@@ -15,7 +15,7 @@ public class ReturnFromSubroutine extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().setPC(getCpu().pull16bits() + 1);
     }
 
     @Override

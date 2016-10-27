@@ -10,13 +10,15 @@ public class InstructionCall {
     private CPU cpu;
     private int opcode;
     private int cycles;
+    private boolean crossPageBoundaryPenalty;
 
-    public InstructionCall(Instruction instruction, AddressingMode mode, CPU cpu, int opcode, int cycles) {
+    public InstructionCall(Instruction instruction, AddressingMode mode, CPU cpu, int opcode, int cycles, boolean crossPageBoundaryPenalty) {
         this.instruction = instruction;
         this.mode = mode;
         this.cpu = cpu;
         this.opcode = opcode;
         this.cycles = cycles;
+        this.crossPageBoundaryPenalty = crossPageBoundaryPenalty;
     }
 
     public int run() {
@@ -62,8 +64,14 @@ public class InstructionCall {
 
         instruction.run(opcode, addr);
 
+        int cycles = this.cycles;
+
+        if (crossPageBoundaryPenalty)
+            cycles++;
+
         return cycles;
     }
+
 
     private int immediate() {
         return cpu.getNextPc();

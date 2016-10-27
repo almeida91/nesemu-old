@@ -15,7 +15,10 @@ public class Break extends Instruction {
 
     @Override
     public void run(int opcode, int address) {
-
+        getCpu().push16bits(getCpu().getPC());
+        getCpu().push(getCpu().getP());
+        getCpu().setInterruptFlag(true);
+        getCpu().readMemory16bit(0xFFFE);
     }
 
     @Override

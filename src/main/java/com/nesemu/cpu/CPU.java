@@ -43,7 +43,6 @@ public class CPU {
             InstructionCall call = instructions.get(opcode);
             cycles = call.run();
 
-            PC++;
         }
         else {
             cycles--;
@@ -84,8 +83,8 @@ public class CPU {
     }
 
     /**
-     * Increases and return the value of the program counter
-     * @return the new value to the PC register
+     * Return and increases the value of the program counter
+     * @return the old value to the PC register
      */
     public int getNextPc() {
         return PC++;

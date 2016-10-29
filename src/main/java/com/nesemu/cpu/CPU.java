@@ -77,7 +77,6 @@ public class CPU {
 
     public void initialize() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         loadInstructions();
-        int x = 0;
     }
 
     public void cycle() {

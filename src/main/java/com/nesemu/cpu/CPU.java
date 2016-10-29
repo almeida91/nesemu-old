@@ -1,8 +1,12 @@
 package com.nesemu.cpu;
 
 import com.nesemu.Mapper;
-import com.nesemu.Util;
 
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,8 +36,48 @@ public class CPU {
 
     private Map<Integer, InstructionCall> instructions;
 
-    public void initialize() {
+    private void addClass(String packageName, File file) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        if (file.getName().endsWith(".class")) {
+            Class<?> c = Class.forName(packageName + "." + file.getName().replace(".class", ""));
 
+            OpCode[] opCodes;
+
+            if (c.isAnnotationPresent(OpCodes.class)) {
+                opCodes = ((OpCodes) c.getAnnotation(OpCodes.class)).value();
+            } else if (c.isAnnotationPresent(OpCode.class)) {
+                opCodes = new OpCode[]{(OpCode) c.getAnnotation(OpCode.class)};
+            } else {
+                return;
+            }
+
+            Constructor<?> constructor = c.getConstructor(CPU.class);
+            Instruction instruction = (Instruction) constructor.newInstance(this);
+
+            for (OpCode opCode : opCodes) {
+                instructions.put(opCode.code(), new InstructionCall(instruction, opCode.mode(), this, opCode.code(), opCode.cycles(), opCode.crossBoundaryPenalty()));
+            }
+        } else {
+            for (File innerFile : file.listFiles()) {
+                addClass(packageName + "." + file.getName(), innerFile);
+            }
+        }
+    }
+
+    private void loadInstructions() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        instructions = new HashMap<>();
+
+        String packageName = "com.nesemu.cpu.instructions";
+        URL packageUrl = Thread.currentThread().getContextClassLoader().getResource(packageName.replace(".", "/"));
+        File packageDir = new File(packageUrl.getFile());
+
+        for (File file : packageDir.listFiles()) {
+            addClass(packageName, file);
+        }
+    }
+
+    public void initialize() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        loadInstructions();
+        int x = 0;
     }
 
     public void cycle() {
@@ -43,8 +87,7 @@ public class CPU {
             InstructionCall call = instructions.get(opcode);
             cycles = call.run();
 
-        }
-        else {
+        } else {
             cycles--;
         }
     }
@@ -56,8 +99,7 @@ public class CPU {
             return ram[address & 0x7FFF];
         } else if (address > 0x4018) {
             return readMemory(address);
-        }
-        else {
+        } else {
             return 0;
         }
     }
@@ -84,6 +126,7 @@ public class CPU {
 
     /**
      * Return and increases the value of the program counter
+     *
      * @return the old value to the PC register
      */
     public int getNextPc() {

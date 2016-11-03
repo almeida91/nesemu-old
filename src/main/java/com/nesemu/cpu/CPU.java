@@ -1,6 +1,7 @@
 package com.nesemu.cpu;
 
 import com.nesemu.Mapper;
+import com.nesemu.ppu.PPU;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -16,9 +17,9 @@ public class CPU {
     private int A;
     private int X;
     private int Y;
-    private int SP;
+    private int SP = 0x01FF;
 
-    private int PC;
+    private int PC = 0x8000;
 
     private boolean carryFlag;
     private boolean zeroFlag;
@@ -33,6 +34,8 @@ public class CPU {
     private int cycles;
 
     private Mapper mapper;
+
+    private PPU ppu;
 
     private Map<Integer, InstructionCall> instructions;
 
@@ -91,14 +94,24 @@ public class CPU {
         }
     }
 
+    public void addCycles(int cycles) {
+        this.cycles += cycles;
+    }
+
     public int readMemory(int address) {
-        if (address < 2048) {
+        if (address <= 0x07FF) {
             return ram[address];
-        } else if (address < 0x1FFF) {
+        } else if (address <= 0x1FFF) {
             return ram[address & 0x7FFF];
-        } else if (address > 0x4018) {
-            return readMemory(address);
+        } else if (address < 0x3FFF) {
+            return ppu.readMemory(address);
+        } else if (address < 0x401F) {
+            // TODO: IO registers / apu registers
+            return 0;
+        } else if (address <= 0xFFFF) {
+            return mapper.read(address);
         } else {
+            // TODO: exception?
             return 0;
         }
     }
@@ -121,6 +134,18 @@ public class CPU {
 
     public void writeMemory(int address, int value) {
         value &= 0xFF;
+
+        if (address <= 0x07FF) {
+            ram[address] = value;
+        } else if (address <= 0x1FFF) {
+            ram[address & 0x7FFF] = value;
+        } else if (address < 0x3FFF) {
+            ppu.writeMemory(address, value);
+        } else if (address < 0x401F) {
+            // TODO: IO registers / apu registers
+        } else if (address <= 0xFFFF) {
+            mapper.write(address, value);
+        }
     }
 
     /**
@@ -135,6 +160,7 @@ public class CPU {
     public void push(int value) {
         writeMemory(SP, value);
         SP--;
+        // TODO: o SP tem que operar em mod 256
     }
 
     public int pull() {

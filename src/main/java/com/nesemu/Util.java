@@ -12,7 +12,11 @@ public class Util {
     }
 
     public static int getUnsignedByte(byte value) {
-        ByteBuffer buffer = ByteBuffer.wrap(new byte[]{0, 0, 0, value}); // BIG ENDIAN!
+        return getUnsigned16BitInteger(value, (byte) 0);
+    }
+
+    public static int getUnsigned16BitInteger(byte low, byte high) {
+        ByteBuffer buffer = ByteBuffer.wrap(new byte[]{0, 0, high, low}); // BIG ENDIAN!
         return buffer.getInt();
     }
 }

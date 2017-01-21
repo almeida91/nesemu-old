@@ -1,4 +1,4 @@
-package com.nesemu.mappers;
+package com.nesemu.ppu;
 
 /**
  * Created by igor on 19/09/16.
